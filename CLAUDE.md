@@ -1,6 +1,7 @@
 # CLAUDE.md — consultation-connector
 
 機能仕様の正本は [docs/SPECIFICATION.md](./docs/SPECIFICATION.md) に置く。実装・テスト・ドキュメントを変更する際は、仕様との整合性を確認すること。
+Issue 起点の開発手順の正本は [docs/DEVELOPMENT_WORKFLOW.md](./docs/DEVELOPMENT_WORKFLOW.md) に置く。
 
 このリポジトリは、各団体(NPO法人本体、法人内の別事業、将来の他法人)のWordPressに導入する、
 相談会日程を管理・配信するためのプラグインです。命名は「各団体のWordPressを通知ネットワークに

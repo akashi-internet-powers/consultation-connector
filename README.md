@@ -9,6 +9,37 @@
 
 設計方針は [CLAUDE.md](./CLAUDE.md) を参照してください。
 機能仕様の正本は [docs/SPECIFICATION.md](./docs/SPECIFICATION.md) です。
+Issue の作成・実装・コミット手順の正本は [docs/DEVELOPMENT_WORKFLOW.md](./docs/DEVELOPMENT_WORKFLOW.md) です。
+
+## 開発フロー
+
+Issue 起点で開発する場合は、Claude Code で次の形式を使用します。
+
+```text
+/01 Issue のタイトル
+```
+
+`/01` は関連するコードと仕様を確認して Issue 本文を作成し、重複確認後に GitHub CLI で Issue を登録します。登録には `gh auth login` による GitHub CLI の認証が必要です。Claude Code 用の定義は `.claude/skills/01-create-issue/SKILL.md` に置いています。
+
+Issue の実装は次の形式で開始します。
+
+```text
+/11 12
+/11 #12 #15
+/11 12,15
+```
+
+`/11` は指定した Issue を取得し、複数 Issue の依存関係や競合を確認してからコードを修正します。仕様書・関連実装・テストも確認し、検証まで行います。コミットと PR 作成は `/11` では行いません。定義は `.claude/skills/11-implement-issues/SKILL.md` に置いています。
+
+修正したコードのコミットは次の形式で行います。
+
+```text
+/21 12
+/21 #12 #15
+/21 12,15
+```
+
+`/21` は指定した Issue に関係するファイルだけをステージし、ステージ済み差分と検証結果を確認してからコミットします。無関係な変更、同一ファイル内で分離できない変更、Issue との対応が不明な変更がある場合はコミットせず停止します。定義は `.claude/skills/21-commit-issue-changes/SKILL.md` に置いています。
 
 ## 使い方
 
