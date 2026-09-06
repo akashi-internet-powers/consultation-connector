@@ -8,6 +8,7 @@
 各団体(法人内の別事業、将来の他法人)は、このプラグインを導入するだけで通知ネットワークに参加できることを目指しています。
 
 設計方針は [CLAUDE.md](./CLAUDE.md) を参照してください。
+機能仕様の正本は [docs/SPECIFICATION.md](./docs/SPECIFICATION.md) です。
 
 ## 使い方
 
