@@ -1,0 +1,8 @@
+{
+  "editor.formatOnSave": false,
+  "files.eol": "\n",
+  "intelephense.environment.phpVersion": "7.4",
+  "search.exclude": {
+    "**/vendor": true
+  }
+}

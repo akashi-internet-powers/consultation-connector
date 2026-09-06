@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "bmewburn.vscode-intelephense-client",
+    "wongjn.php-sniffer",
+    "anthropic.claude-code",
+    "editorconfig.editorconfig"
+  ]
+}

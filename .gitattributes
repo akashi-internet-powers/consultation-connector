@@ -1,0 +1,7 @@
+# Windows(Windows 11)とmacOS(MacBook Pro)の両方で開発するため、改行コードをLFに統一する
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.ttf binary

@@ -1,0 +1,6 @@
+.DS_Store
+vendor/
+*.log
+
+# Claude Codeの個人用ローカル設定(共有しない)
+.claude/settings.local.json
