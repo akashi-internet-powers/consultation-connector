@@ -20,6 +20,20 @@ require_once CC_PLUGIN_DIR . 'includes/class-post-type.php';
 require_once CC_PLUGIN_DIR . 'includes/class-meta-box.php';
 require_once CC_PLUGIN_DIR . 'includes/class-rest-api.php';
 
+function cc_activate(): void
+{
+    CC_Post_Type::register();
+    flush_rewrite_rules();
+}
+
+function cc_deactivate(): void
+{
+    flush_rewrite_rules();
+}
+
+register_activation_hook(__FILE__, 'cc_activate');
+register_deactivation_hook(__FILE__, 'cc_deactivate');
+
 add_action('init', ['CC_Post_Type', 'register']);
 CC_Meta_Box::register();
 add_action('rest_api_init', ['CC_Rest_Api', 'register_fields']);

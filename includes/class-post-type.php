@@ -12,11 +12,11 @@ class CC_Post_Type
             'label'        => '相談会日程',
             'public'       => true,
             'show_in_rest' => true, // consultation-app からの取得はこのフラグが前提
-            'supports'     => ['title', 'editor', 'custom-fields'],
+            'supports'     => ['title', 'editor', 'thumbnail', 'custom-fields'],
             'menu_icon'    => 'dashicons-calendar-alt',
         ]);
 
-        // カスタムフィールド(開催日・時間帯表示・場所・ステータス・予約URL)
+        // カスタムフィールド(開催日・時間帯表示・場所名称・住所・ステータス・予約URL)
         // ACFは使わず register_post_meta + 自作メタボックス(class-meta-box.php)で実装(CLAUDE.md参照)
         register_post_meta('consultation_event', 'start_at', [
             'type'         => 'string',
@@ -29,6 +29,16 @@ class CC_Post_Type
             'show_in_rest' => true,
         ]);
         register_post_meta('consultation_event', 'location', [
+            'type'         => 'string',
+            'single'       => true,
+            'show_in_rest' => true,
+        ]);
+        register_post_meta('consultation_event', 'location_name', [
+            'type'         => 'string',
+            'single'       => true,
+            'show_in_rest' => true,
+        ]);
+        register_post_meta('consultation_event', 'location_address', [
             'type'         => 'string',
             'single'       => true,
             'show_in_rest' => true,
