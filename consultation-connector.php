@@ -15,10 +15,12 @@ if (!defined('ABSPATH')) {
 }
 
 define('CC_PLUGIN_DIR', plugin_dir_path(__FILE__));
+define('CC_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 require_once CC_PLUGIN_DIR . 'includes/class-post-type.php';
 require_once CC_PLUGIN_DIR . 'includes/class-meta-box.php';
 require_once CC_PLUGIN_DIR . 'includes/class-rest-api.php';
+require_once CC_PLUGIN_DIR . 'includes/class-settings.php';
 require_once CC_PLUGIN_DIR . 'includes/class-single-event.php';
 
 function cc_activate(): void
@@ -37,6 +39,7 @@ register_deactivation_hook(__FILE__, 'cc_deactivate');
 
 add_action('init', ['CC_Post_Type', 'register']);
 CC_Meta_Box::register();
+CC_Settings::register();
 CC_Single_Event::register();
 add_action('rest_api_init', ['CC_Rest_Api', 'register_fields']);
 

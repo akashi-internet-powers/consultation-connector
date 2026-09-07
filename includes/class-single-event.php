@@ -9,6 +9,19 @@ class CC_Single_Event
     public static function register(): void
     {
         add_filter('the_content', [self::class, 'append_details']);
+        add_action('wp_enqueue_scripts', [self::class, 'enqueue_styles']);
+    }
+
+    public static function enqueue_styles(): void
+    {
+        if (is_singular('consultation_event')) {
+            wp_enqueue_style(
+                'cc-single-event',
+                CC_PLUGIN_URL . 'assets/single-event.css',
+                [],
+                '0.1.0'
+            );
+        }
     }
 
     public static function append_details(string $content): string
@@ -64,6 +77,19 @@ class CC_Single_Event
                 . '</p>';
         }
 
-        return $details . '</section>' . $content;
+        $details .= '</section>';
+
+        if (CC_Settings::get_detail_layout() === 'two-pane') {
+            return '<div class="cc-event-details-layout cc-event-details-layout--two-pane">'
+                . '<div class="cc-event-details-layout__main">' . $content . '</div>'
+                . '<div class="cc-event-details-layout__side">' . str_replace(
+                    'class="cc-event-details"',
+                    'class="cc-event-details cc-event-details--card"',
+                    $details
+                ) . '</div>'
+                . '</div>';
+        }
+
+        return $details . $content;
     }
 }
