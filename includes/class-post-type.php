@@ -8,6 +8,9 @@ class CC_Post_Type
 {
     public static function register(): void
     {
+        add_filter('manage_consultation_event_posts_columns', [self::class, 'columns']);
+        add_action('manage_consultation_event_posts_custom_column', [self::class, 'render_column'], 10, 2);
+
         register_post_type('consultation_event', [
             'label'        => '相談会日程',
             'public'       => true,
@@ -53,5 +56,46 @@ class CC_Post_Type
             'single'       => true,
             'show_in_rest' => true,
         ]);
+    }
+
+    public static function columns(array $columns): array
+    {
+        $new_columns = [];
+
+        foreach ($columns as $key => $label) {
+            $new_columns[$key] = $label;
+
+            if ($key === 'title') {
+                $new_columns['start_at']     = '開催日';
+                $new_columns['time_note']    = '時間帯';
+                $new_columns['location_name'] = '場所の名称';
+                $new_columns['status']       = 'ステータス';
+            }
+        }
+
+        return $new_columns;
+    }
+
+    public static function render_column(string $column, int $post_id): void
+    {
+        $value = get_post_meta($post_id, $column, true);
+
+        if ($column === 'start_at') {
+            $date = DateTimeImmutable::createFromFormat('Y-m-d\\TH:i', $value, wp_timezone());
+            echo $date ? esc_html($date->format('Y年n月j日')) : '';
+            return;
+        }
+
+        if ($column === 'status') {
+            $labels = [
+                'open'   => '受付中',
+                'full'   => '満席',
+                'closed' => '終了',
+            ];
+            echo esc_html($labels[$value ?: 'open'] ?? $value);
+            return;
+        }
+
+        echo esc_html($value);
     }
 }
