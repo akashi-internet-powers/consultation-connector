@@ -12,7 +12,7 @@ class CC_Post_Type
         add_action('manage_consultation_event_posts_custom_column', [self::class, 'render_column'], 10, 2);
 
         register_post_type('consultation_event', [
-            'label'        => '相談会日程',
+            'label'        => __('相談会日程', 'consultation-connector'),
             'public'       => true,
             'show_in_rest' => true, // consultation-app からの取得はこのフラグが前提
             'supports'     => ['title', 'editor', 'thumbnail', 'custom-fields'],
@@ -66,10 +66,10 @@ class CC_Post_Type
             $new_columns[$key] = $label;
 
             if ($key === 'title') {
-                $new_columns['start_at']     = '開催日';
-                $new_columns['time_note']    = '時間帯';
-                $new_columns['location_name'] = '場所の名称';
-                $new_columns['status']       = 'ステータス';
+                $new_columns['start_at']     = __('開催日', 'consultation-connector');
+                $new_columns['time_note']    = __('時間帯', 'consultation-connector');
+                $new_columns['location_name'] = __('場所の名称', 'consultation-connector');
+                $new_columns['status']       = __('ステータス', 'consultation-connector');
             }
         }
 
@@ -88,9 +88,9 @@ class CC_Post_Type
 
         if ($column === 'status') {
             $labels = [
-                'open'   => '受付中',
-                'full'   => '満席',
-                'closed' => '終了',
+                'open'   => __('受付中', 'consultation-connector'),
+                'full'   => __('満席', 'consultation-connector'),
+                'closed' => __('終了', 'consultation-connector'),
             ];
             echo esc_html($labels[$value ?: 'open'] ?? $value);
             return;

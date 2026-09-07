@@ -7,6 +7,10 @@
  * @var array $attributes
  */
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 $events = get_posts([
     'post_type'      => 'consultation_event',
     'posts_per_page' => -1,
@@ -56,15 +60,15 @@ if ($layout === 'table') :
         <table class="ce-event-table">
             <thead>
                 <tr>
-                    <th scope="col">開催日</th>
-                    <th scope="col">相談会</th>
-                    <th scope="col">開催場所</th>
-                    <th scope="col">ステータス</th>
+                    <th scope="col"><?php esc_html_e('開催日', 'consultation-connector'); ?></th>
+                    <th scope="col"><?php esc_html_e('相談会', 'consultation-connector'); ?></th>
+                    <th scope="col"><?php esc_html_e('開催場所', 'consultation-connector'); ?></th>
+                    <th scope="col"><?php esc_html_e('ステータス', 'consultation-connector'); ?></th>
                     <?php if ($show_detail_link) : ?>
-                        <th scope="col">詳細</th>
+                        <th scope="col"><?php esc_html_e('詳細', 'consultation-connector'); ?></th>
                     <?php endif; ?>
                     <?php if ($show_reservation_link) : ?>
-                        <th scope="col">予約</th>
+                        <th scope="col"><?php esc_html_e('予約', 'consultation-connector'); ?></th>
                     <?php endif; ?>
                 </tr>
             </thead>
@@ -95,7 +99,11 @@ foreach ($events as $event) :
         : '';
     $status          = get_post_meta($event->ID, 'status', true) ?: 'open';
     $reservation_url = get_post_meta($event->ID, 'reservation_url', true);
-    $status_label    = ['open' => '受付中', 'full' => '満席', 'closed' => '終了'][$status] ?? '';
+    $status_label    = [
+        'open'   => __('受付中', 'consultation-connector'),
+        'full'   => __('満席', 'consultation-connector'),
+        'closed' => __('終了', 'consultation-connector'),
+    ][$status] ?? '';
     $event_url       = get_permalink($event);
     $display_date    = $format_date($start_at);
     $card_date       = DateTimeImmutable::createFromFormat('Y-m-d\\TH:i', $start_at, wp_timezone());
@@ -109,16 +117,16 @@ foreach ($events as $event) :
             <td>
                 <?php echo esc_html($location_name); ?>
                 <?php if ($location_address) : ?><br><small><?php echo esc_html($location_address); ?></small><?php endif; ?>
-                <?php if ($map_url) : ?><br><a href="<?php echo esc_url($map_url); ?>" target="_blank" rel="noopener">地図を見る</a><?php endif; ?>
+                <?php if ($map_url) : ?><br><a href="<?php echo esc_url($map_url); ?>" target="_blank" rel="noopener"><?php esc_html_e('地図を見る', 'consultation-connector'); ?></a><?php endif; ?>
             </td>
             <td><?php echo esc_html($status_label); ?></td>
             <?php if ($show_detail_link) : ?>
-                <td><a href="<?php echo esc_url($event_url); ?>">詳細を見る</a></td>
+                <td><a href="<?php echo esc_url($event_url); ?>"><?php esc_html_e('詳細を見る', 'consultation-connector'); ?></a></td>
             <?php endif; ?>
             <?php if ($show_reservation_link) : ?>
                 <td>
                     <?php if ($reservation_url && $status === 'open') : ?>
-                        <a href="<?php echo esc_url($reservation_url); ?>">予約する</a>
+                        <a href="<?php echo esc_url($reservation_url); ?>"><?php esc_html_e('予約する', 'consultation-connector'); ?></a>
                     <?php endif; ?>
                 </td>
             <?php endif; ?>
@@ -134,9 +142,13 @@ foreach ($events as $event) :
                 <?php if ($card_date) : ?>
                     <span class="ce-event-card__month"><?php echo esc_html($card_date->format('n月')); ?></span>
                     <strong class="ce-event-card__day"><?php echo esc_html($card_date->format('j')); ?></strong>
-                    <span class="ce-event-card__weekday"><?php echo esc_html(['日', '月', '火', '水', '木', '金', '土'][(int) $card_date->format('w')]); ?>曜日</span>
+                    <span class="ce-event-card__weekday"><?php echo esc_html(sprintf(
+                        /* translators: %s: 曜日を表す漢字1文字(例: 月) */
+                        __('%s曜日', 'consultation-connector'),
+                        ['日', '月', '火', '水', '木', '金', '土'][(int) $card_date->format('w')]
+                    )); ?></span>
                 <?php else : ?>
-                    <span class="ce-event-card__month">開催日</span>
+                    <span class="ce-event-card__month"><?php esc_html_e('開催日', 'consultation-connector'); ?></span>
                     <span class="ce-event-card__day">-</span>
                 <?php endif; ?>
             </div>
@@ -151,12 +163,12 @@ foreach ($events as $event) :
                 <?php if ($location_name || $location_address) : ?>
                     <p class="ce-event-card__location">
                         <?php echo esc_html($location_name); ?><?php if ($location_address) : ?> / <?php echo esc_html($location_address); ?><?php endif; ?>
-                        <?php if ($map_url) : ?> <a href="<?php echo esc_url($map_url); ?>" target="_blank" rel="noopener">地図</a><?php endif; ?>
+                        <?php if ($map_url) : ?> <a href="<?php echo esc_url($map_url); ?>" target="_blank" rel="noopener"><?php esc_html_e('地図', 'consultation-connector'); ?></a><?php endif; ?>
                     </p>
                 <?php endif; ?>
                 <div class="ce-event-card__actions">
-                    <?php if ($show_detail_link) : ?><a class="ce-event-card__detail" href="<?php echo esc_url($event_url); ?>">詳細を見る</a><?php endif; ?>
-                    <?php if ($show_reservation_link && $reservation_url && $status === 'open') : ?><a class="ce-event-card__reserve" href="<?php echo esc_url($reservation_url); ?>">予約する</a><?php endif; ?>
+                    <?php if ($show_detail_link) : ?><a class="ce-event-card__detail" href="<?php echo esc_url($event_url); ?>"><?php esc_html_e('詳細を見る', 'consultation-connector'); ?></a><?php endif; ?>
+                    <?php if ($show_reservation_link && $reservation_url && $status === 'open') : ?><a class="ce-event-card__reserve" href="<?php echo esc_url($reservation_url); ?>"><?php esc_html_e('予約する', 'consultation-connector'); ?></a><?php endif; ?>
                 </div>
             </div>
             <?php if ($image_url) : ?>
@@ -176,7 +188,7 @@ foreach ($events as $event) :
         <span class="ce-event-list__meta">
             <?php echo esc_html($display_date); ?> / <?php echo esc_html($location_name); ?>
             <?php if ($location_address) : ?> / <?php echo esc_html($location_address); ?><?php endif; ?>
-            <?php if ($map_url) : ?> / <a href="<?php echo esc_url($map_url); ?>" target="_blank" rel="noopener">地図</a><?php endif; ?>
+            <?php if ($map_url) : ?> / <a href="<?php echo esc_url($map_url); ?>" target="_blank" rel="noopener"><?php esc_html_e('地図', 'consultation-connector'); ?></a><?php endif; ?>
         </span>
         <?php if ($time_note) : ?>
             <span class="ce-event-list__time-note">(<?php echo esc_html($time_note); ?>)</span>

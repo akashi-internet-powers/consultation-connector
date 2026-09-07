@@ -1,8 +1,8 @@
 === Consultation Connector ===
-Contributors: (法人のWordPress.orgユーザー名)
+Contributors: J-KEI
 Tags: events, rest-api, nonprofit
 Requires at least: 6.0
-Tested up to: 6.7
+Tested up to: 7.1
 Requires PHP: 7.4
 Stable tag: 0.1.0
 License: GPLv2 or later
@@ -51,3 +51,8 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 `/wp-json/wp/v2/consultation_event`
 
 カスタム項目はレスポンスの `meta` に `start_at`、`time_note`、`location_name`、`location_address`、`status`、`reservation_url` として含まれます。Google マップのリンクは `location_address` から表示時に生成します。
+
+== Changelog ==
+
+= 0.1.0 =
+* 初回リリース。相談会日程のカスタム投稿タイプ、REST API公開、日程一覧ブロック、個別記事への詳細情報自動追記に対応。
