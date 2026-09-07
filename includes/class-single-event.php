@@ -64,6 +64,6 @@ class CC_Single_Event
                 . '</p>';
         }
 
-        return $content . $details . '</section>';
+        return $details . '</section>' . $content;
     }
 }
