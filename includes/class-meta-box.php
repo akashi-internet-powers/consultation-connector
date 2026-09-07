@@ -89,7 +89,7 @@ class CC_Meta_Box
     {
         if (
             !isset($_POST[self::NONCE_NAME]) ||
-            !wp_verify_nonce($_POST[self::NONCE_NAME], self::NONCE_ACTION)
+            !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST[self::NONCE_NAME])), self::NONCE_ACTION)
         ) {
             return;
         }

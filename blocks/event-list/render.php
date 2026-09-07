@@ -7,6 +7,10 @@
  * @var array $attributes
  */
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 $events = get_posts([
     'post_type'      => 'consultation_event',
     'posts_per_page' => -1,
