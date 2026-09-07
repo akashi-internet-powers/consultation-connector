@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
  */
 class CC_Meta_Box
 {
-    private const FIELDS = ['start_at', 'time_note', 'location', 'status', 'reservation_url'];
+    private const FIELDS = ['start_at', 'time_note', 'location_name', 'location_address', 'status', 'reservation_url'];
     private const NONCE_ACTION = 'ce_save_meta_box';
     private const NONCE_NAME = 'ce_meta_box_nonce';
 
@@ -39,14 +39,16 @@ class CC_Meta_Box
 
         $start_at        = get_post_meta($post->ID, 'start_at', true);
         $time_note       = get_post_meta($post->ID, 'time_note', true);
-        $location        = get_post_meta($post->ID, 'location', true);
+        $location_name    = get_post_meta($post->ID, 'location_name', true) ?: get_post_meta($post->ID, 'location', true);
+        $location_address = get_post_meta($post->ID, 'location_address', true);
         $status          = get_post_meta($post->ID, 'status', true) ?: 'open';
         $reservation_url = get_post_meta($post->ID, 'reservation_url', true);
         ?>
         <p>
-            <label for="ce_start_at">開催日</label><br>
+                 <label for="ce_start_at">開催日・並び順</label><br>
             <input type="datetime-local" id="ce_start_at" name="ce_start_at"
                    value="<?php echo esc_attr($start_at); ?>">
+                 <span class="description">同日に複数の日程がある場合、この日時の時刻を一覧の並び順に使用します。表示上の時間帯は下の「時間帯」に入力します。</span>
         </p>
         <p>
             <label for="ce_time_note">時間帯(表示用・自由記述)</label><br>
@@ -56,9 +58,16 @@ class CC_Meta_Box
             <span class="description">複数時間枠がある場合も、厳密な枠管理はせず表示用の文言としてここに記載します。</span>
         </p>
         <p>
-            <label for="ce_location">開催場所</label><br>
-            <input type="text" id="ce_location" name="ce_location" class="widefat"
-                   value="<?php echo esc_attr($location); ?>">
+            <label for="ce_location_name">場所の名称</label><br>
+            <input type="text" id="ce_location_name" name="ce_location_name" class="widefat"
+                   placeholder="例: ○○市民センター"
+                   value="<?php echo esc_attr($location_name); ?>">
+        </p>
+        <p>
+            <label for="ce_location_address">住所</label><br>
+            <input type="text" id="ce_location_address" name="ce_location_address" class="widefat"
+                   placeholder="例: 東京都○○区○○1-2-3"
+                   value="<?php echo esc_attr($location_address); ?>">
         </p>
         <p>
             <label for="ce_status">ステータス</label><br>
@@ -96,7 +105,8 @@ class CC_Meta_Box
         $map = [
             'ce_start_at'        => 'start_at',
             'ce_time_note'       => 'time_note',
-            'ce_location'        => 'location',
+            'ce_location_name'   => 'location_name',
+            'ce_location_address' => 'location_address',
             'ce_status'          => 'status',
             'ce_reservation_url' => 'reservation_url',
         ];

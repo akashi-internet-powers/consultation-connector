@@ -19,32 +19,191 @@ if (empty($events)) {
     echo '<p>' . esc_html__('現在、公開中の相談会日程はありません。', 'consultation-connector') . '</p>';
     return;
 }
-?>
-<ul class="ce-event-list">
-    <?php foreach ($events as $event) :
-        $start_at        = get_post_meta($event->ID, 'start_at', true);
-        $time_note       = get_post_meta($event->ID, 'time_note', true);
-        $location        = get_post_meta($event->ID, 'location', true);
-        $status          = get_post_meta($event->ID, 'status', true) ?: 'open';
-        $reservation_url = get_post_meta($event->ID, 'reservation_url', true);
-        $status_label    = ['open' => '受付中', 'full' => '満席', 'closed' => '終了'][$status] ?? '';
+
+$layout          = isset($attributes['layout']) && in_array($attributes['layout'], ['list', 'table', 'card'], true)
+    ? $attributes['layout']
+    : 'list';
+$show_detail_link = !isset($attributes['showDetailLink']) || $attributes['showDetailLink'];
+$show_reservation_link = !isset($attributes['showReservationLink']) || $attributes['showReservationLink'];
+$date_format      = isset($attributes['dateFormat']) ? $attributes['dateFormat'] : 'full';
+$date_formats     = ['full', 'date', 'slash', 'short'];
+$date_format      = in_array($date_format, $date_formats, true) ? $date_format : 'full';
+$format_date      = static function (string $value) use ($date_format): string {
+    $date = DateTimeImmutable::createFromFormat('Y-m-d\\TH:i', $value, wp_timezone());
+    if (!$date) {
+        return $value;
+    }
+
+    $weekdays = ['日', '月', '火', '水', '木', '金', '土'];
+    $weekday  = $weekdays[(int) $date->format('w')];
+
+    switch ($date_format) {
+        case 'date':
+            return $date->format('Y年n月j日') . '（' . $weekday . '）';
+        case 'slash':
+            return $date->format('Y/m/d') . '（' . $weekday . '）';
+        case 'short':
+            return $date->format('n月j日') . '（' . $weekday . '）';
+        case 'full':
+        default:
+            return $date->format('Y年n月j日') . '（' . $weekday . '）';
+    }
+};
+
+if ($layout === 'table') :
+    ?>
+    <div class="ce-event-table-wrapper">
+        <table class="ce-event-table">
+            <thead>
+                <tr>
+                    <th scope="col">開催日</th>
+                    <th scope="col">相談会</th>
+                    <th scope="col">開催場所</th>
+                    <th scope="col">ステータス</th>
+                    <?php if ($show_detail_link) : ?>
+                        <th scope="col">詳細</th>
+                    <?php endif; ?>
+                    <?php if ($show_reservation_link) : ?>
+                        <th scope="col">予約</th>
+                    <?php endif; ?>
+                </tr>
+            </thead>
+            <tbody>
+    <?php
+elseif ($layout === 'card') :
+    ?>
+    <ul class="ce-event-cards">
+    <?php
+else :
+    ?>
+    <ul class="ce-event-list">
+    <?php
+endif;
+
+foreach ($events as $event) :
+    $start_at        = get_post_meta($event->ID, 'start_at', true);
+    $time_note       = get_post_meta($event->ID, 'time_note', true);
+    $location_name   = get_post_meta($event->ID, 'location_name', true);
+    $location_address = get_post_meta($event->ID, 'location_address', true);
+    $legacy_location = get_post_meta($event->ID, 'location', true);
+    if (!$location_name && !$location_address) {
+        $location_name = $legacy_location;
+    }
+    $map_query = trim($location_name . ' ' . $location_address);
+    $map_url   = $map_query
+        ? 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode($map_query)
+        : '';
+    $status          = get_post_meta($event->ID, 'status', true) ?: 'open';
+    $reservation_url = get_post_meta($event->ID, 'reservation_url', true);
+    $status_label    = ['open' => '受付中', 'full' => '満席', 'closed' => '終了'][$status] ?? '';
+    $event_url       = get_permalink($event);
+    $display_date    = $format_date($start_at);
+    $card_date       = DateTimeImmutable::createFromFormat('Y-m-d\\TH:i', $start_at, wp_timezone());
+    $image_url       = get_the_post_thumbnail_url($event, 'medium');
+
+    if ($layout === 'table') :
         ?>
-        <li class="ce-event-list__item ce-event-list__item--<?php echo esc_attr($status); ?>">
-            <h3 class="ce-event-list__title"><?php echo esc_html($event->post_title); ?></h3>
-            <p class="ce-event-list__meta">
-                <?php echo esc_html($start_at); ?> / <?php echo esc_html($location); ?>
-            </p>
-            <?php if ($time_note) : ?>
-                <p class="ce-event-list__time-note"><?php echo esc_html($time_note); ?></p>
+        <tr class="ce-event-table__row ce-event-table__row--<?php echo esc_attr($status); ?>">
+            <td><?php echo esc_html($display_date); ?><?php if ($time_note) : ?><br><small><?php echo esc_html($time_note); ?></small><?php endif; ?></td>
+            <td><?php echo esc_html($event->post_title); ?></td>
+            <td>
+                <?php echo esc_html($location_name); ?>
+                <?php if ($location_address) : ?><br><small><?php echo esc_html($location_address); ?></small><?php endif; ?>
+                <?php if ($map_url) : ?><br><a href="<?php echo esc_url($map_url); ?>" target="_blank" rel="noopener">地図を見る</a><?php endif; ?>
+            </td>
+            <td><?php echo esc_html($status_label); ?></td>
+            <?php if ($show_detail_link) : ?>
+                <td><a href="<?php echo esc_url($event_url); ?>">詳細を見る</a></td>
             <?php endif; ?>
-            <p class="ce-event-list__status"><?php echo esc_html($status_label); ?></p>
-            <?php if ($reservation_url && $status === 'open') : ?>
-                <p class="ce-event-list__reserve">
-                    <a href="<?php echo esc_url($reservation_url); ?>">
-                        <?php esc_html_e('予約する', 'consultation-connector'); ?>
-                    </a>
-                </p>
+            <?php if ($show_reservation_link) : ?>
+                <td>
+                    <?php if ($reservation_url && $status === 'open') : ?>
+                        <a href="<?php echo esc_url($reservation_url); ?>">予約する</a>
+                    <?php endif; ?>
+                </td>
+            <?php endif; ?>
+        </tr>
+        <?php
+        continue;
+    endif;
+
+    if ($layout === 'card') :
+        ?>
+        <li class="ce-event-card ce-event-card--<?php echo esc_attr($status); ?>">
+            <div class="ce-event-card__date" aria-hidden="true">
+                <?php if ($card_date) : ?>
+                    <span class="ce-event-card__month"><?php echo esc_html($card_date->format('n月')); ?></span>
+                    <strong class="ce-event-card__day"><?php echo esc_html($card_date->format('j')); ?></strong>
+                    <span class="ce-event-card__weekday"><?php echo esc_html(['日', '月', '火', '水', '木', '金', '土'][(int) $card_date->format('w')]); ?>曜日</span>
+                <?php else : ?>
+                    <span class="ce-event-card__month">開催日</span>
+                    <span class="ce-event-card__day">-</span>
+                <?php endif; ?>
+            </div>
+            <div class="ce-event-card__body">
+                <span class="ce-event-card__status"><?php echo esc_html($status_label); ?></span>
+                <h3 class="ce-event-card__title">
+                    <?php if ($show_detail_link) : ?><a href="<?php echo esc_url($event_url); ?>"><?php endif; ?>
+                        <?php echo esc_html($event->post_title); ?>
+                    <?php if ($show_detail_link) : ?></a><?php endif; ?>
+                </h3>
+                <?php if ($time_note) : ?><p class="ce-event-card__time-note"><?php echo esc_html($time_note); ?></p><?php endif; ?>
+                <?php if ($location_name || $location_address) : ?>
+                    <p class="ce-event-card__location">
+                        <?php echo esc_html($location_name); ?><?php if ($location_address) : ?> / <?php echo esc_html($location_address); ?><?php endif; ?>
+                        <?php if ($map_url) : ?> <a href="<?php echo esc_url($map_url); ?>" target="_blank" rel="noopener">地図</a><?php endif; ?>
+                    </p>
+                <?php endif; ?>
+                <div class="ce-event-card__actions">
+                    <?php if ($show_detail_link) : ?><a class="ce-event-card__detail" href="<?php echo esc_url($event_url); ?>">詳細を見る</a><?php endif; ?>
+                    <?php if ($show_reservation_link && $reservation_url && $status === 'open') : ?><a class="ce-event-card__reserve" href="<?php echo esc_url($reservation_url); ?>">予約する</a><?php endif; ?>
+                </div>
+            </div>
+            <?php if ($image_url) : ?>
+                <img class="ce-event-card__image" src="<?php echo esc_url($image_url); ?>" alt="" loading="lazy">
             <?php endif; ?>
         </li>
-    <?php endforeach; ?>
-</ul>
+        <?php
+        continue;
+    endif;
+    ?>
+    <li class="ce-event-list__item ce-event-list__item--<?php echo esc_attr($status); ?>">
+        <span class="ce-event-list__title">
+            <?php if ($show_detail_link) : ?><a href="<?php echo esc_url($event_url); ?>"><?php endif; ?>
+                <?php echo esc_html($event->post_title); ?>
+            <?php if ($show_detail_link) : ?></a><?php endif; ?>
+        </span>
+        <span class="ce-event-list__meta">
+            <?php echo esc_html($display_date); ?> / <?php echo esc_html($location_name); ?>
+            <?php if ($location_address) : ?> / <?php echo esc_html($location_address); ?><?php endif; ?>
+            <?php if ($map_url) : ?> / <a href="<?php echo esc_url($map_url); ?>" target="_blank" rel="noopener">地図</a><?php endif; ?>
+        </span>
+        <?php if ($time_note) : ?>
+            <span class="ce-event-list__time-note">(<?php echo esc_html($time_note); ?>)</span>
+        <?php endif; ?>
+        <span class="ce-event-list__status"><?php echo esc_html($status_label); ?></span>
+        <?php if ($show_reservation_link && $reservation_url && $status === 'open') : ?>
+            <span class="ce-event-list__reserve">
+                <a href="<?php echo esc_url($reservation_url); ?>"><?php esc_html_e('予約する', 'consultation-connector'); ?></a>
+            </span>
+        <?php endif; ?>
+    </li>
+    <?php
+endforeach;
+
+if ($layout === 'table') :
+    ?>
+            </tbody>
+        </table>
+    </div>
+    <?php
+elseif ($layout === 'card') :
+    ?>
+    </ul>
+    <?php
+else :
+    ?>
+    </ul>
+    <?php
+endif;
+return;
