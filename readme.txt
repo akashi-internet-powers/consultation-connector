@@ -8,51 +8,51 @@ Stable tag: 0.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-相談会の日程を管理し、REST API経由でアプリへ配信するプラグイン。
+Manage consultation session schedules and publish them to an app via the REST API.
 
 == Description ==
 
-相談会の日程(開催日時・場所・受付ステータス・予約URL)を管理するカスタム投稿タイプを提供します。
-予約フォームや予約データの管理は行わず、既存の予約システムへのリンクを日程データに持たせる形で連携します。
+Provides a custom post type for managing consultation session schedules (date and time, venue, reception status, and reservation URL).
+This plugin does not handle reservation forms or reservation data itself; instead, each schedule holds a link to an existing external reservation system.
 
 == Installation ==
 
-1. `wp-content/plugins/consultation-connector/` にプラグインを配置する
-2. WordPress 管理画面の「プラグイン」から Consultation Connector を有効化する
-3. 管理画面の「相談会日程」から日程を登録する
-4. 必要に応じて「相談会日程一覧」ブロックを固定ページやテンプレートに配置する
+1. Place the plugin in `wp-content/plugins/consultation-connector/`.
+2. Activate "Consultation Connector" from the WordPress admin "Plugins" screen.
+3. Register schedules from the "Consultation Events" admin menu.
+4. Add the "Consultation Event List" block to a page or template as needed.
 
 == Usage ==
 
-=== 日程の登録 ===
+=== Registering a schedule ===
 
-「相談会日程」>「新規追加」からタイトルと「相談会 詳細情報」を入力して公開します。
+Open "Consultation Events" > "Add New", enter a title, and fill in the "Consultation Event Details" fields before publishing.
 
-* 開催日・並び順: 日付と同日内の並び順を決める日時。時刻は表示には使用しません
-* 時間帯: 表示用の自由記述
-* 場所の名称: 会場名
-* 住所: 開催場所の住所
-* 地図: 住所から生成した Google マップへのリンク
-* ステータス: 受付中、満席、終了
-* 予約URL: 外部予約システムの URL
+* Date & Sort Order: the date (and, within the same day, the time used only for sort order). The time itself is not shown on the front end
+* Time Note: a free-text field for the displayed time slot(s)
+* Venue Name: the name of the venue
+* Address: the address of the venue
+* Map: a Google Maps link generated from the address
+* Status: Open, Full, or Closed
+* Reservation URL: the URL of the external reservation system
 
-複数の時間枠は、1つの日程の「時間帯」に自由記述で入力します。予約データや定員は管理しません。
+If a session has multiple time slots, enter them all as free text in "Time Note". Reservations and capacity are not managed by this plugin.
 
-=== Webページへの表示 ===
+=== Displaying the schedule on a web page ===
 
-ブロックエディターで「相談会日程一覧」ブロックを追加します。日程は開催日時の昇順で表示され、ステータスが「受付中」の場合だけ予約URLへのリンクが表示されます。
+Add the "Consultation Event List" block in the block editor. Schedules are displayed in ascending order of date, and a reservation link is shown only for sessions with the "Open" status.
 
-ブロックの設定で、一行表示、表形式、カード形式を選択できます。カード形式では、日付を左、相談会情報を中央、アイキャッチ画像を右に表示します。日付は曜日付きで、`2026年9月6日（日）`、`2026/09/06（日）`、`9月6日（日）` の形式から選択できます。時間帯は「時間帯」項目の自由記述を表示します。詳細リンクと、受付中の日程の予約 URL リンクの表示・非表示も設定できます。
+The block settings let you choose a list, table, or card layout. In the card layout, the date is shown on the left, the session details in the middle, and the featured image on the right. The date can be shown with the day of the week in one of three formats (for example `September 6, 2026 (Sun)`, `2026/09/06 (Sun)`, or `Sep 6 (Sun)`). The "Time Note" field is shown as the displayed time slot. You can also toggle whether the detail link and the reservation link (for open sessions) are shown.
 
 === REST API ===
 
-公開済みの日程は、次の標準 REST API で取得できます。
+Published schedules are available through the standard REST API:
 
 `/wp-json/wp/v2/consultation_event`
 
-カスタム項目はレスポンスの `meta` に `start_at`、`time_note`、`location_name`、`location_address`、`status`、`reservation_url` として含まれます。Google マップのリンクは `location_address` から表示時に生成します。
+Custom fields are included in the response `meta` as `start_at`, `time_note`, `location_name`, `location_address`, `status`, and `reservation_url`. The Google Maps link is generated from `location_address` at display time.
 
 == Changelog ==
 
 = 0.1.0 =
-* 初回リリース。相談会日程のカスタム投稿タイプ、REST API公開、日程一覧ブロック、個別記事への詳細情報自動追記に対応。
+* Initial release. Adds the consultation event custom post type, REST API exposure, the event list block, and automatic detail appending on single event posts.
