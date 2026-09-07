@@ -25,7 +25,7 @@ class CC_Meta_Box
     {
         add_meta_box(
             'ce_event_details',
-            '相談会 詳細情報',
+            __('相談会 詳細情報', 'consultation-connector'),
             [self::class, 'render'],
             'consultation_event',
             'normal',
@@ -45,40 +45,40 @@ class CC_Meta_Box
         $reservation_url = get_post_meta($post->ID, 'reservation_url', true);
         ?>
         <p>
-                 <label for="ce_start_at">開催日・並び順</label><br>
+                 <label for="ce_start_at"><?php esc_html_e('開催日・並び順', 'consultation-connector'); ?></label><br>
             <input type="datetime-local" id="ce_start_at" name="ce_start_at"
                    value="<?php echo esc_attr($start_at); ?>">
-                 <span class="description">同日に複数の日程がある場合、この日時の時刻を一覧の並び順に使用します。表示上の時間帯は下の「時間帯」に入力します。</span>
+                 <span class="description"><?php esc_html_e('同日に複数の日程がある場合、この日時の時刻を一覧の並び順に使用します。表示上の時間帯は下の「時間帯」に入力します。', 'consultation-connector'); ?></span>
         </p>
         <p>
-            <label for="ce_time_note">時間帯(表示用・自由記述)</label><br>
+            <label for="ce_time_note"><?php esc_html_e('時間帯(表示用・自由記述)', 'consultation-connector'); ?></label><br>
             <input type="text" id="ce_time_note" name="ce_time_note" class="widefat"
-                   placeholder="例: 10:00〜 / 13:00〜 / 15:00〜(各回45分)"
+                   placeholder="<?php echo esc_attr__('例: 10:00〜 / 13:00〜 / 15:00〜(各回45分)', 'consultation-connector'); ?>"
                    value="<?php echo esc_attr($time_note); ?>">
-            <span class="description">複数時間枠がある場合も、厳密な枠管理はせず表示用の文言としてここに記載します。</span>
+            <span class="description"><?php esc_html_e('複数時間枠がある場合も、厳密な枠管理はせず表示用の文言としてここに記載します。', 'consultation-connector'); ?></span>
         </p>
         <p>
-            <label for="ce_location_name">場所の名称</label><br>
+            <label for="ce_location_name"><?php esc_html_e('場所の名称', 'consultation-connector'); ?></label><br>
             <input type="text" id="ce_location_name" name="ce_location_name" class="widefat"
-                   placeholder="例: ○○市民センター"
+                   placeholder="<?php echo esc_attr__('例: ○○市民センター', 'consultation-connector'); ?>"
                    value="<?php echo esc_attr($location_name); ?>">
         </p>
         <p>
-            <label for="ce_location_address">住所</label><br>
+            <label for="ce_location_address"><?php esc_html_e('住所', 'consultation-connector'); ?></label><br>
             <input type="text" id="ce_location_address" name="ce_location_address" class="widefat"
-                   placeholder="例: 東京都○○区○○1-2-3"
+                   placeholder="<?php echo esc_attr__('例: 東京都○○区○○1-2-3', 'consultation-connector'); ?>"
                    value="<?php echo esc_attr($location_address); ?>">
         </p>
         <p>
-            <label for="ce_status">ステータス</label><br>
+            <label for="ce_status"><?php esc_html_e('ステータス', 'consultation-connector'); ?></label><br>
             <select id="ce_status" name="ce_status">
-                <option value="open" <?php selected($status, 'open'); ?>>受付中</option>
-                <option value="full" <?php selected($status, 'full'); ?>>満席</option>
-                <option value="closed" <?php selected($status, 'closed'); ?>>終了</option>
+                <option value="open" <?php selected($status, 'open'); ?>><?php esc_html_e('受付中', 'consultation-connector'); ?></option>
+                <option value="full" <?php selected($status, 'full'); ?>><?php esc_html_e('満席', 'consultation-connector'); ?></option>
+                <option value="closed" <?php selected($status, 'closed'); ?>><?php esc_html_e('終了', 'consultation-connector'); ?></option>
             </select>
         </p>
         <p>
-            <label for="ce_reservation_url">予約URL(外部システム)</label><br>
+            <label for="ce_reservation_url"><?php esc_html_e('予約URL(外部システム)', 'consultation-connector'); ?></label><br>
             <input type="url" id="ce_reservation_url" name="ce_reservation_url" class="widefat"
                    value="<?php echo esc_attr($reservation_url); ?>">
         </p>

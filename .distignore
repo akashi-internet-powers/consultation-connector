@@ -1,0 +1,17 @@
+.git
+.gitignore
+.gitattributes
+.editorconfig
+.distignore
+.github
+.claude
+.vscode
+docs
+CLAUDE.md
+README.md
+node_modules
+composer.json
+composer.lock
+package.json
+package-lock.json
+*.log

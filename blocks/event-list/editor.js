@@ -1,9 +1,11 @@
 (function (wp) {
+    var __ = wp.i18n.__;
+
     wp.blocks.registerBlockType('consultation-connector/event-list', {
-        title: '相談会日程一覧',
+        title: __('相談会日程一覧', 'consultation-connector'),
         category: 'widgets',
         icon: 'calendar-alt',
-        description: '相談会の日程一覧をWeb表示する動的ブロック。',
+        description: __('相談会の日程一覧をWeb表示する動的ブロック。', 'consultation-connector'),
         attributes: {
             layout: {
                 type: 'string',
@@ -41,19 +43,19 @@
                     InspectorControls,
                     null,
                     wp.element.createElement(SelectControl, {
-                        label: '表示形式',
+                        label: __('表示形式', 'consultation-connector'),
                         value: props.attributes.layout,
                         options: [
-                            { label: '一行表示', value: 'list' },
-                            { label: '表形式', value: 'table' },
-                            { label: 'カード形式', value: 'card' },
+                            { label: __('一行表示', 'consultation-connector'), value: 'list' },
+                            { label: __('表形式', 'consultation-connector'), value: 'table' },
+                            { label: __('カード形式', 'consultation-connector'), value: 'card' },
                         ],
                         onChange: function (layout) {
                             props.setAttributes({ layout: layout });
                         },
                     }),
                     wp.element.createElement(SelectControl, {
-                        label: '日付表示',
+                        label: __('日付表示', 'consultation-connector'),
                         value: props.attributes.dateFormat,
                         options: [
                             { label: '2026年9月6日（日）', value: 'full' },
@@ -65,14 +67,14 @@
                         },
                     }),
                     wp.element.createElement(ToggleControl, {
-                        label: '詳細リンクを表示',
+                        label: __('詳細リンクを表示', 'consultation-connector'),
                         checked: props.attributes.showDetailLink,
                         onChange: function (showDetailLink) {
                             props.setAttributes({ showDetailLink: showDetailLink });
                         },
                     }),
                     wp.element.createElement(ToggleControl, {
-                        label: '予約URLリンクを表示',
+                        label: __('予約URLリンクを表示', 'consultation-connector'),
                         checked: props.attributes.showReservationLink,
                         onChange: function (showReservationLink) {
                             props.setAttributes({ showReservationLink: showReservationLink });
@@ -82,7 +84,7 @@
                 wp.element.createElement(
                     'p',
                     blockProps,
-                    '相談会日程一覧（公開画面で表示されます）'
+                    __('相談会日程一覧（公開画面で表示されます）', 'consultation-connector')
                 )
             );
         },
