@@ -1,0 +1,85 @@
+.cc-event-details-layout {
+    display: block;
+}
+
+.cc-event-details-layout__main {
+    min-width: 0;
+}
+
+.cc-event-details--card {
+    background: #fff;
+    border: 1px solid #d9dde3;
+    border-radius: 4px;
+    box-shadow: 0 8px 20px rgba(21, 37, 59, 0.08);
+    color: #243247;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.cc-event-details--card h2 {
+    display: none;
+}
+
+.cc-event-details--card dl {
+    margin: 0;
+}
+
+.cc-event-details--card dt {
+    color: #667387;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.cc-event-details--card dt:not(:first-of-type) {
+    border-top: 1px solid #eef0f3;
+    padding-top: 12px;
+}
+
+.cc-event-details--card dd {
+    color: #243247;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 3px 0 12px;
+}
+
+.cc-event-details__reservation {
+    margin: 16px 0 0;
+}
+
+.cc-event-details__reservation a {
+    color: #a14b35;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.cc-event-details__reservation a:hover {
+    text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+    .cc-event-details-layout--two-pane {
+        align-items: start;
+        display: grid;
+        gap: 32px;
+        grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+    }
+
+    .cc-event-details-layout__side {
+        min-width: 0;
+        position: sticky;
+        top: 24px;
+    }
+}
+
+@media (max-width: 767px) {
+    .cc-event-details-layout--two-pane .cc-event-details--card {
+        margin-top: 24px;
+    }
+
+    .cc-event-details--card {
+        padding: 16px;
+    }
+
+}
