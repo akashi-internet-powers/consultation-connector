@@ -5,7 +5,7 @@ disable-model-invocation: true
 argument-hint: "Issue 番号。例: 12 または #12 #15"
 ---
 
-`$ARGUMENTS` から Issue 番号を抽出し、[docs/DEVELOPMENT_WORKFLOW.md](../../../docs/DEVELOPMENT_WORKFLOW.md) の `/21` 仕様に従って、指定 Issue に関係する変更だけをコミットしてください。空白、`,`、`、` 区切りを許可し、`#` は除去します。
+`$ARGUMENTS` から Issue 番号を抽出し、[spec/DEVELOPMENT_WORKFLOW.md](../../../spec/DEVELOPMENT_WORKFLOW.md) の `/21` 仕様に従って、指定 Issue に関係する変更だけをコミットしてください。空白、`,`、`、` 区切りを許可し、`#` は除去します。
 
 ## 開始前
 

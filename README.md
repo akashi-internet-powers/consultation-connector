@@ -8,8 +8,9 @@
 各団体(法人内の別事業、将来の他法人)は、このプラグインを導入するだけで通知ネットワークに参加できることを目指しています。
 
 設計方針は [CLAUDE.md](./CLAUDE.md) を参照してください。
-機能仕様の正本は [docs/SPECIFICATION.md](./docs/SPECIFICATION.md) です。
-Issue の作成・実装・コミット手順の正本は [docs/DEVELOPMENT_WORKFLOW.md](./docs/DEVELOPMENT_WORKFLOW.md) です。
+機能仕様の正本は [spec/SPECIFICATION.md](./spec/SPECIFICATION.md) です。
+Issue の作成・実装・コミット手順の正本は [spec/DEVELOPMENT_WORKFLOW.md](./spec/DEVELOPMENT_WORKFLOW.md) です。
+検討中・調査中の文書は [docs/](./docs/) に置きます。
 
 ## 開発フロー
 
