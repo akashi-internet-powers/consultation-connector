@@ -56,8 +56,8 @@ $format_date      = static function (string $value) use ($date_format): string {
 
 if ($layout === 'table') :
     ?>
-    <div class="ce-event-table-wrapper">
-        <table class="ce-event-table">
+    <div class="otsg-event-table-wrapper">
+        <table class="otsg-event-table">
             <thead>
                 <tr>
                     <th scope="col"><?php esc_html_e('開催日', 'ototsugu-connector'); ?></th>
@@ -76,11 +76,11 @@ if ($layout === 'table') :
     <?php
 elseif ($layout === 'card') :
     ?>
-    <ul class="ce-event-cards">
+    <ul class="otsg-event-cards">
     <?php
 else :
     ?>
-    <ul class="ce-event-list">
+    <ul class="otsg-event-list">
     <?php
 endif;
 
@@ -111,7 +111,7 @@ foreach ($events as $event) :
 
     if ($layout === 'table') :
         ?>
-        <tr class="ce-event-table__row ce-event-table__row--<?php echo esc_attr($status); ?>">
+        <tr class="otsg-event-table__row otsg-event-table__row--<?php echo esc_attr($status); ?>">
             <td><?php echo esc_html($display_date); ?><?php if ($time_note) : ?><br><small><?php echo esc_html($time_note); ?></small><?php endif; ?></td>
             <td><?php echo esc_html($event->post_title); ?></td>
             <td>
@@ -137,65 +137,65 @@ foreach ($events as $event) :
 
     if ($layout === 'card') :
         ?>
-        <li class="ce-event-card ce-event-card--<?php echo esc_attr($status); ?>">
-            <div class="ce-event-card__date" aria-hidden="true">
+        <li class="otsg-event-card otsg-event-card--<?php echo esc_attr($status); ?>">
+            <div class="otsg-event-card__date" aria-hidden="true">
                 <?php if ($card_date) : ?>
-                    <span class="ce-event-card__month"><?php echo esc_html($card_date->format('n月')); ?></span>
-                    <strong class="ce-event-card__day"><?php echo esc_html($card_date->format('j')); ?></strong>
-                    <span class="ce-event-card__weekday"><?php echo esc_html(sprintf(
+                    <span class="otsg-event-card__month"><?php echo esc_html($card_date->format('n月')); ?></span>
+                    <strong class="otsg-event-card__day"><?php echo esc_html($card_date->format('j')); ?></strong>
+                    <span class="otsg-event-card__weekday"><?php echo esc_html(sprintf(
                         /* translators: %s: 曜日を表す漢字1文字(例: 月) */
                         __('%s曜日', 'ototsugu-connector'),
                         ['日', '月', '火', '水', '木', '金', '土'][(int) $card_date->format('w')]
                     )); ?></span>
                 <?php else : ?>
-                    <span class="ce-event-card__month"><?php esc_html_e('開催日', 'ototsugu-connector'); ?></span>
-                    <span class="ce-event-card__day">-</span>
+                    <span class="otsg-event-card__month"><?php esc_html_e('開催日', 'ototsugu-connector'); ?></span>
+                    <span class="otsg-event-card__day">-</span>
                 <?php endif; ?>
             </div>
-            <div class="ce-event-card__body">
-                <span class="ce-event-card__status"><?php echo esc_html($status_label); ?></span>
-                <h3 class="ce-event-card__title">
+            <div class="otsg-event-card__body">
+                <span class="otsg-event-card__status"><?php echo esc_html($status_label); ?></span>
+                <h3 class="otsg-event-card__title">
                     <?php if ($show_detail_link) : ?><a href="<?php echo esc_url($event_url); ?>"><?php endif; ?>
                         <?php echo esc_html($event->post_title); ?>
                     <?php if ($show_detail_link) : ?></a><?php endif; ?>
                 </h3>
-                <?php if ($time_note) : ?><p class="ce-event-card__time-note"><?php echo esc_html($time_note); ?></p><?php endif; ?>
+                <?php if ($time_note) : ?><p class="otsg-event-card__time-note"><?php echo esc_html($time_note); ?></p><?php endif; ?>
                 <?php if ($location_name || $location_address) : ?>
-                    <p class="ce-event-card__location">
+                    <p class="otsg-event-card__location">
                         <?php echo esc_html($location_name); ?><?php if ($location_address) : ?> / <?php echo esc_html($location_address); ?><?php endif; ?>
                         <?php if ($map_url) : ?> <a href="<?php echo esc_url($map_url); ?>" target="_blank" rel="noopener"><?php esc_html_e('地図', 'ototsugu-connector'); ?></a><?php endif; ?>
                     </p>
                 <?php endif; ?>
-                <div class="ce-event-card__actions">
-                    <?php if ($show_detail_link) : ?><a class="ce-event-card__detail" href="<?php echo esc_url($event_url); ?>"><?php esc_html_e('詳細を見る', 'ototsugu-connector'); ?></a><?php endif; ?>
-                    <?php if ($show_reservation_link && $reservation_url && $status === 'open') : ?><a class="ce-event-card__reserve" href="<?php echo esc_url($reservation_url); ?>"><?php esc_html_e('予約する', 'ototsugu-connector'); ?></a><?php endif; ?>
+                <div class="otsg-event-card__actions">
+                    <?php if ($show_detail_link) : ?><a class="otsg-event-card__detail" href="<?php echo esc_url($event_url); ?>"><?php esc_html_e('詳細を見る', 'ototsugu-connector'); ?></a><?php endif; ?>
+                    <?php if ($show_reservation_link && $reservation_url && $status === 'open') : ?><a class="otsg-event-card__reserve" href="<?php echo esc_url($reservation_url); ?>"><?php esc_html_e('予約する', 'ototsugu-connector'); ?></a><?php endif; ?>
                 </div>
             </div>
             <?php if ($image_url) : ?>
-                <img class="ce-event-card__image" src="<?php echo esc_url($image_url); ?>" alt="" loading="lazy">
+                <img class="otsg-event-card__image" src="<?php echo esc_url($image_url); ?>" alt="" loading="lazy">
             <?php endif; ?>
         </li>
         <?php
         continue;
     endif;
     ?>
-    <li class="ce-event-list__item ce-event-list__item--<?php echo esc_attr($status); ?>">
-        <span class="ce-event-list__title">
+    <li class="otsg-event-list__item otsg-event-list__item--<?php echo esc_attr($status); ?>">
+        <span class="otsg-event-list__title">
             <?php if ($show_detail_link) : ?><a href="<?php echo esc_url($event_url); ?>"><?php endif; ?>
                 <?php echo esc_html($event->post_title); ?>
             <?php if ($show_detail_link) : ?></a><?php endif; ?>
         </span>
-        <span class="ce-event-list__meta">
+        <span class="otsg-event-list__meta">
             <?php echo esc_html($display_date); ?> / <?php echo esc_html($location_name); ?>
             <?php if ($location_address) : ?> / <?php echo esc_html($location_address); ?><?php endif; ?>
             <?php if ($map_url) : ?> / <a href="<?php echo esc_url($map_url); ?>" target="_blank" rel="noopener"><?php esc_html_e('地図', 'ototsugu-connector'); ?></a><?php endif; ?>
         </span>
         <?php if ($time_note) : ?>
-            <span class="ce-event-list__time-note">(<?php echo esc_html($time_note); ?>)</span>
+            <span class="otsg-event-list__time-note">(<?php echo esc_html($time_note); ?>)</span>
         <?php endif; ?>
-        <span class="ce-event-list__status"><?php echo esc_html($status_label); ?></span>
+        <span class="otsg-event-list__status"><?php echo esc_html($status_label); ?></span>
         <?php if ($show_reservation_link && $reservation_url && $status === 'open') : ?>
-            <span class="ce-event-list__reserve">
+            <span class="otsg-event-list__reserve">
                 <a href="<?php echo esc_url($reservation_url); ?>"><?php esc_html_e('予約する', 'ototsugu-connector'); ?></a>
             </span>
         <?php endif; ?>

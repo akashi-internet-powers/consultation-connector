@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class OC_Post_Type
+class OTSG_Post_Type
 {
     public static function register(): void
     {

@@ -1,12 +1,12 @@
-.oc-event-details-layout {
+.otsg-event-details-layout {
     display: block;
 }
 
-.oc-event-details-layout__main {
+.otsg-event-details-layout__main {
     min-width: 0;
 }
 
-.oc-event-details--card {
+.otsg-event-details--card {
     background: #fff;
     border: 1px solid #d9dde3;
     border-radius: 4px;
@@ -16,57 +16,57 @@
     padding: 20px;
 }
 
-.oc-event-details--card h2 {
+.otsg-event-details--card h2 {
     display: none;
 }
 
-.oc-event-details--card dl {
+.otsg-event-details--card dl {
     margin: 0;
 }
 
-.oc-event-details--card dt {
+.otsg-event-details--card dt {
     color: #667387;
     font-size: 12px;
     font-weight: 700;
     line-height: 1.4;
 }
 
-.oc-event-details--card dt:not(:first-of-type) {
+.otsg-event-details--card dt:not(:first-of-type) {
     border-top: 1px solid #eef0f3;
     padding-top: 12px;
 }
 
-.oc-event-details--card dd {
+.otsg-event-details--card dd {
     color: #243247;
     font-size: 14px;
     line-height: 1.5;
     margin: 3px 0 12px;
 }
 
-.oc-event-details__reservation {
+.otsg-event-details__reservation {
     margin: 16px 0 0;
 }
 
-.oc-event-details__reservation a {
+.otsg-event-details__reservation a {
     color: #a14b35;
     font-size: 13px;
     font-weight: 600;
     text-decoration: none;
 }
 
-.oc-event-details__reservation a:hover {
+.otsg-event-details__reservation a:hover {
     text-decoration: underline;
 }
 
 @media (min-width: 768px) {
-    .oc-event-details-layout--two-pane {
+    .otsg-event-details-layout--two-pane {
         align-items: start;
         display: grid;
         gap: 32px;
         grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
     }
 
-    .oc-event-details-layout__side {
+    .otsg-event-details-layout__side {
         min-width: 0;
         position: sticky;
         top: 24px;
@@ -74,11 +74,11 @@
 }
 
 @media (max-width: 767px) {
-    .oc-event-details-layout--two-pane .oc-event-details--card {
+    .otsg-event-details-layout--two-pane .otsg-event-details--card {
         margin-top: 24px;
     }
 
-    .oc-event-details--card {
+    .otsg-event-details--card {
         padding: 16px;
     }
 

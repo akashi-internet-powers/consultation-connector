@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class OC_Single_Event
+class OTSG_Single_Event
 {
     public static function register(): void
     {
@@ -16,8 +16,8 @@ class OC_Single_Event
     {
         if (is_singular('consultation_event')) {
             wp_enqueue_style(
-                'oc-single-event',
-                OC_PLUGIN_URL . 'assets/single-event.css',
+                'otsg-single-event',
+                OTSG_PLUGIN_URL . 'assets/single-event.css',
                 [],
                 '0.1.0'
             );
@@ -67,24 +67,24 @@ class OC_Single_Event
         $status_label = $status_labels[$status] ?? $status;
         $fields[]      = '<dt>' . esc_html__('ステータス', 'ototsugu-connector') . '</dt><dd>' . esc_html($status_label) . '</dd>';
 
-        $details = '<section class="oc-event-details">'
+        $details = '<section class="otsg-event-details">'
             . '<h2>' . esc_html__('相談会 詳細情報', 'ototsugu-connector') . '</h2>'
             . '<dl>' . implode('', $fields) . '</dl>';
 
         if ($reservation_url && $status === 'open') {
-            $details .= '<p class="oc-event-details__reservation">'
+            $details .= '<p class="otsg-event-details__reservation">'
                 . '<a href="' . esc_url($reservation_url) . '" target="_blank" rel="noopener">' . esc_html__('予約する', 'ototsugu-connector') . '</a>'
                 . '</p>';
         }
 
         $details .= '</section>';
 
-        if (OC_Settings::get_detail_layout() === 'two-pane') {
-            return '<div class="oc-event-details-layout oc-event-details-layout--two-pane">'
-                . '<div class="oc-event-details-layout__main">' . $content . '</div>'
-                . '<div class="oc-event-details-layout__side">' . str_replace(
-                    'class="oc-event-details"',
-                    'class="oc-event-details oc-event-details--card"',
+        if (OTSG_Settings::get_detail_layout() === 'two-pane') {
+            return '<div class="otsg-event-details-layout otsg-event-details-layout--two-pane">'
+                . '<div class="otsg-event-details-layout__main">' . $content . '</div>'
+                . '<div class="otsg-event-details-layout__side">' . str_replace(
+                    'class="otsg-event-details"',
+                    'class="otsg-event-details otsg-event-details--card"',
                     $details
                 ) . '</div>'
                 . '</div>';

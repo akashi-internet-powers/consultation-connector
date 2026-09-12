@@ -1,4 +1,4 @@
-.ce-event-cards {
+.otsg-event-cards {
     display: grid;
     gap: 12px;
     list-style: none;
@@ -6,7 +6,7 @@
     padding: 0;
 }
 
-.ce-event-card {
+.otsg-event-card {
     align-items: stretch;
     background: #fff;
     border: 1px solid #d9dde3;
@@ -17,7 +17,7 @@
     overflow: hidden;
 }
 
-.ce-event-card__date {
+.otsg-event-card__date {
     align-items: center;
     border-right: 1px solid #d9dde3;
     color: #243247;
@@ -28,82 +28,82 @@
     text-align: center;
 }
 
-.ce-event-card__month,
-.ce-event-card__weekday,
-.ce-event-card__time {
+.otsg-event-card__month,
+.otsg-event-card__weekday,
+.otsg-event-card__time {
     color: #687486;
     font-size: 12px;
     line-height: 1.4;
 }
 
-.ce-event-card__day {
+.otsg-event-card__day {
     color: #15253b;
     font-size: 30px;
     font-weight: 700;
     line-height: 1.05;
 }
 
-.ce-event-card__body {
+.otsg-event-card__body {
     min-width: 0;
     padding: 16px 20px;
 }
 
-.ce-event-card__status {
+.otsg-event-card__status {
     color: #667387;
     font-size: 12px;
     font-weight: 600;
 }
 
-.ce-event-card__title {
+.otsg-event-card__title {
     font-size: 18px;
     line-height: 1.45;
     margin: 3px 0 6px;
 }
 
-.ce-event-card__title a {
+.otsg-event-card__title a {
     color: #1b4f8a;
     text-decoration: none;
 }
 
-.ce-event-card__title a:hover,
-.ce-event-card__detail:hover,
-.ce-event-card__location a:hover {
+.otsg-event-card__title a:hover,
+.otsg-event-card__detail:hover,
+.otsg-event-card__location a:hover {
     text-decoration: underline;
 }
 
-.ce-event-card__time-note,
-.ce-event-card__location {
+.otsg-event-card__time-note,
+.otsg-event-card__location {
     color: #687486;
     font-size: 13px;
     line-height: 1.5;
     margin: 3px 0;
 }
 
-.ce-event-card__location a {
+.otsg-event-card__location a {
     color: #1b4f8a;
     white-space: nowrap;
 }
 
-.ce-event-card__actions {
+.otsg-event-card__actions {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     margin-top: 10px;
 }
 
-.ce-event-card__detail,
-.ce-event-card__reserve {
+.otsg-event-card__detail,
+.otsg-event-card__reserve {
     color: #1b4f8a;
     font-size: 13px;
     font-weight: 600;
     text-decoration: none;
 }
 
-.ce-event-card__reserve {
+.otsg-event-card__reserve {
     color: #a14b35;
 }
 
-.ce-event-card__image {
+.otsg-event-card__image {
     height: 100%;
     min-height: 148px;
     object-fit: cover;
@@ -111,15 +111,15 @@
 }
 
 @media (max-width: 640px) {
-    .ce-event-card {
+    .otsg-event-card {
         grid-template-columns: 64px minmax(0, 1fr);
     }
 
-    .ce-event-card__body {
+    .otsg-event-card__body {
         padding: 14px 15px;
     }
 
-    .ce-event-card__image {
+    .otsg-event-card__image {
         display: none;
     }
 }
