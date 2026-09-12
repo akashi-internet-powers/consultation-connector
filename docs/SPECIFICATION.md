@@ -1,11 +1,11 @@
-# Consultation Connector 仕様書
+# Ototsugu Connector 仕様書
 
 ## 1. 文書の位置づけ
 
-この文書は Consultation Connector プラグインの機能仕様と設計上の決定事項をまとめたものです。実装と仕様に差異がある場合は、変更内容をこの文書へ反映し、コード・テスト・利用手順を同時に更新します。
+この文書は Ototsugu Connector プラグインの機能仕様と設計上の決定事項をまとめたものです。実装と仕様に差異がある場合は、変更内容をこの文書へ反映し、コード・テスト・利用手順を同時に更新します。
 
-- 対象リポジトリ: `consultation-connector`
-- プラグイン名: Consultation Connector
+- 対象リポジトリ: `ototsugu-connector`
+- プラグイン名: Ototsugu Connector
 - 現行バージョン: `0.1.0`
 - ライセンス: GPLv2 or later
 - 最低対応環境: WordPress 6.0、PHP 7.4
@@ -39,7 +39,7 @@
 ## 4. 構成
 
 ```text
-consultation-connector.php       プラグインの起動、フック登録、rewrite 更新
+ototsugu-connector.php           プラグインの起動、フック登録、rewrite 更新
 includes/
   class-post-type.php             投稿タイプと投稿メタの登録
   class-meta-box.php              管理画面の入力 UI と保存
@@ -127,7 +127,7 @@ https://www.google.com/maps/search/?api=1&query={会場名と住所}
 ## 7. Web 表示ブロック
 
 - ブロック名: `相談会日程一覧`
-- 内部名: `consultation-connector/event-list`
+- 内部名: `ototsugu-connector/event-list`
 - 描画方式: サーバーサイドレンダリング
 - データ取得: `consultation_event` の公開済み投稿
 - 並び順: `start_at` の昇順

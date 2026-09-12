@@ -1,17 +1,17 @@
-# CLAUDE.md — consultation-connector
+# CLAUDE.md — ototsugu-connector
 
 機能仕様の正本は [docs/SPECIFICATION.md](./docs/SPECIFICATION.md) に置く。実装・テスト・ドキュメントを変更する際は、仕様との整合性を確認すること。
 Issue 起点の開発手順の正本は [docs/DEVELOPMENT_WORKFLOW.md](./docs/DEVELOPMENT_WORKFLOW.md) に置く。
 
 このリポジトリは、各団体(NPO法人本体、法人内の別事業、将来の他法人)のWordPressに導入する、
 相談会日程を管理・配信するためのプラグインです。命名は「各団体のWordPressを通知ネットワークに
-接続する」役割に由来します(`consultation-app` / `consultation-connector` / `consultation-hub` の3リポジトリ構成)。
+接続する」役割に由来します(`ototsugu-app` / `ototsugu-connector` / `ototsugu-hub` の3リポジトリ構成)。
 
 ## 位置づけ
 
 - **これは配布物。** 自団体だけでなく、将来的に他法人にも「プラグインを入れるだけで参加できる」ことを
   目的とした設計にする。団体固有のロジックを埋め込まない。
-- consultation-app(アプリ側)がこのプラグインのREST APIを叩いて日程を取得する。
+- ototsugu-app(アプリ側)がこのプラグインのREST APIを叩いて日程を取得する。
 - 予約データはこのプラグインでは扱わない。日程には「外部予約システムへのURL」のみを持たせる。
 
 ## 主な機能
@@ -23,7 +23,7 @@ Issue 起点の開発手順の正本は [docs/DEVELOPMENT_WORKFLOW.md](./docs/DE
 ## スコープ外(意図的に持たない機能)
 
 - 予約フォーム・予約データの保持
-- プッシュ通知の送信処理そのもの(中央管理側 `consultation-hub` の責務)
+- プッシュ通知の送信処理そのもの(中央管理側 `ototsugu-hub` の責務)
 - QRコード生成(初回リリースでは対応しない。将来拡張として想定)
 - 定員のシステム連携・自動満席判定(主催者による手動運用)
 
@@ -73,10 +73,10 @@ GPLv2以降。WordPress本体・WordPress公式プラグインディレクトリ
 
 ## 開発順序とMVP(決定事項)
 
-3リポジトリの開発順序は `consultation-connector` → `consultation-hub` → `consultation-app`。
+3リポジトリの開発順序は `ototsugu-connector` → `ototsugu-hub` → `ototsugu-app`。
 理由: このリポジトリは(WordPressでのWeb公開という)単独で価値が出る機能を持つため、
 アプリ・中央管理が未完成でも先に動くものとして完成させられる。また、ここで
-REST APIの実データ・挙動を先に固めることで、`consultation-app`側の手戻りを防ぐ。
+REST APIの実データ・挙動を先に固めることで、`ototsugu-app`側の手戻りを防ぐ。
 
 ### MVPに含めるもの
 
@@ -91,7 +91,7 @@ REST APIの実データ・挙動を先に固めることで、`consultation-app`
 - 予約フォーム・予約データの保持
 - QRコード生成
 - 定員のシステム連携
-- `consultation-hub`への通知トリガー連携(hub完成後のフェーズ2で追加)
+- `ototsugu-hub`への通知トリガー連携(hub完成後のフェーズ2で追加)
 
 ### Web表示の実装方式(決定事項)
 

@@ -1,4 +1,4 @@
-=== Consultation Connector ===
+=== Ototsugu Connector ===
 Contributors: J-KEI
 Tags: events, rest-api, nonprofit
 Requires at least: 6.0
@@ -17,8 +17,8 @@ This plugin does not handle reservation forms or reservation data itself; instea
 
 == Installation ==
 
-1. Place the plugin in `wp-content/plugins/consultation-connector/`.
-2. Activate "Consultation Connector" from the WordPress admin "Plugins" screen.
+1. Place the plugin in `wp-content/plugins/ototsugu-connector/`.
+2. Activate "Ototsugu Connector" from the WordPress admin "Plugins" screen.
 3. Register schedules from the "Consultation Events" admin menu.
 4. Add the "Consultation Event List" block to a page or template as needed.
 

@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class CC_Post_Type
+class OC_Post_Type
 {
     public static function register(): void
     {
@@ -12,7 +12,7 @@ class CC_Post_Type
         add_action('manage_consultation_event_posts_custom_column', [self::class, 'render_column'], 10, 2);
 
         register_post_type('consultation_event', [
-            'label'        => __('相談会日程', 'consultation-connector'),
+            'label'        => __('相談会日程', 'ototsugu-connector'),
             'public'       => true,
             'show_in_rest' => true, // consultation-app からの取得はこのフラグが前提
             'supports'     => ['title', 'editor', 'thumbnail', 'custom-fields'],
@@ -66,10 +66,10 @@ class CC_Post_Type
             $new_columns[$key] = $label;
 
             if ($key === 'title') {
-                $new_columns['start_at']     = __('開催日', 'consultation-connector');
-                $new_columns['time_note']    = __('時間帯', 'consultation-connector');
-                $new_columns['location_name'] = __('場所の名称', 'consultation-connector');
-                $new_columns['status']       = __('ステータス', 'consultation-connector');
+                $new_columns['start_at']     = __('開催日', 'ototsugu-connector');
+                $new_columns['time_note']    = __('時間帯', 'ototsugu-connector');
+                $new_columns['location_name'] = __('場所の名称', 'ototsugu-connector');
+                $new_columns['status']       = __('ステータス', 'ototsugu-connector');
             }
         }
 
@@ -88,9 +88,9 @@ class CC_Post_Type
 
         if ($column === 'status') {
             $labels = [
-                'open'   => __('受付中', 'consultation-connector'),
-                'full'   => __('満席', 'consultation-connector'),
-                'closed' => __('終了', 'consultation-connector'),
+                'open'   => __('受付中', 'ototsugu-connector'),
+                'full'   => __('満席', 'ototsugu-connector'),
+                'closed' => __('終了', 'ototsugu-connector'),
             ];
             echo esc_html($labels[$value ?: 'open'] ?? $value);
             return;

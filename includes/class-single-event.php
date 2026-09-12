@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class CC_Single_Event
+class OC_Single_Event
 {
     public static function register(): void
     {
@@ -16,8 +16,8 @@ class CC_Single_Event
     {
         if (is_singular('consultation_event')) {
             wp_enqueue_style(
-                'cc-single-event',
-                CC_PLUGIN_URL . 'assets/single-event.css',
+                'oc-single-event',
+                OC_PLUGIN_URL . 'assets/single-event.css',
                 [],
                 '0.1.0'
             );
@@ -47,44 +47,44 @@ class CC_Single_Event
         $date   = DateTimeImmutable::createFromFormat('Y-m-d\\TH:i', $start_at, wp_timezone());
 
         if ($date) {
-            $fields[] = '<dt>' . esc_html__('開催日', 'consultation-connector') . '</dt><dd>' . esc_html($date->format('Y年n月j日')) . '</dd>';
+            $fields[] = '<dt>' . esc_html__('開催日', 'ototsugu-connector') . '</dt><dd>' . esc_html($date->format('Y年n月j日')) . '</dd>';
         }
         if ($time_note) {
-            $fields[] = '<dt>' . esc_html__('時間帯', 'consultation-connector') . '</dt><dd>' . esc_html($time_note) . '</dd>';
+            $fields[] = '<dt>' . esc_html__('時間帯', 'ototsugu-connector') . '</dt><dd>' . esc_html($time_note) . '</dd>';
         }
         if ($location_name) {
-            $fields[] = '<dt>' . esc_html__('場所の名称', 'consultation-connector') . '</dt><dd>' . esc_html($location_name) . '</dd>';
+            $fields[] = '<dt>' . esc_html__('場所の名称', 'ototsugu-connector') . '</dt><dd>' . esc_html($location_name) . '</dd>';
         }
         if ($location_address) {
-            $fields[] = '<dt>' . esc_html__('住所', 'consultation-connector') . '</dt><dd>' . esc_html($location_address) . '</dd>';
+            $fields[] = '<dt>' . esc_html__('住所', 'ototsugu-connector') . '</dt><dd>' . esc_html($location_address) . '</dd>';
         }
 
         $status_labels = [
-            'open'   => __('受付中', 'consultation-connector'),
-            'full'   => __('満席', 'consultation-connector'),
-            'closed' => __('終了', 'consultation-connector'),
+            'open'   => __('受付中', 'ototsugu-connector'),
+            'full'   => __('満席', 'ototsugu-connector'),
+            'closed' => __('終了', 'ototsugu-connector'),
         ];
         $status_label = $status_labels[$status] ?? $status;
-        $fields[]      = '<dt>' . esc_html__('ステータス', 'consultation-connector') . '</dt><dd>' . esc_html($status_label) . '</dd>';
+        $fields[]      = '<dt>' . esc_html__('ステータス', 'ototsugu-connector') . '</dt><dd>' . esc_html($status_label) . '</dd>';
 
-        $details = '<section class="cc-event-details">'
-            . '<h2>' . esc_html__('相談会 詳細情報', 'consultation-connector') . '</h2>'
+        $details = '<section class="oc-event-details">'
+            . '<h2>' . esc_html__('相談会 詳細情報', 'ototsugu-connector') . '</h2>'
             . '<dl>' . implode('', $fields) . '</dl>';
 
         if ($reservation_url && $status === 'open') {
-            $details .= '<p class="cc-event-details__reservation">'
-                . '<a href="' . esc_url($reservation_url) . '" target="_blank" rel="noopener">' . esc_html__('予約する', 'consultation-connector') . '</a>'
+            $details .= '<p class="oc-event-details__reservation">'
+                . '<a href="' . esc_url($reservation_url) . '" target="_blank" rel="noopener">' . esc_html__('予約する', 'ototsugu-connector') . '</a>'
                 . '</p>';
         }
 
         $details .= '</section>';
 
-        if (CC_Settings::get_detail_layout() === 'two-pane') {
-            return '<div class="cc-event-details-layout cc-event-details-layout--two-pane">'
-                . '<div class="cc-event-details-layout__main">' . $content . '</div>'
-                . '<div class="cc-event-details-layout__side">' . str_replace(
-                    'class="cc-event-details"',
-                    'class="cc-event-details cc-event-details--card"',
+        if (OC_Settings::get_detail_layout() === 'two-pane') {
+            return '<div class="oc-event-details-layout oc-event-details-layout--two-pane">'
+                . '<div class="oc-event-details-layout__main">' . $content . '</div>'
+                . '<div class="oc-event-details-layout__side">' . str_replace(
+                    'class="oc-event-details"',
+                    'class="oc-event-details oc-event-details--card"',
                     $details
                 ) . '</div>'
                 . '</div>';
