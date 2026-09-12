@@ -5,12 +5,12 @@ disable-model-invocation: true
 argument-hint: "Issue タイトル"
 ---
 
-`$ARGUMENTS` を Issue タイトルとして扱い、[docs/DEVELOPMENT_WORKFLOW.md](../../../docs/DEVELOPMENT_WORKFLOW.md) の正規形式で GitHub Issue を 1 件作成してください。
+`$ARGUMENTS` を Issue タイトルとして扱い、[spec/DEVELOPMENT_WORKFLOW.md](../../../spec/DEVELOPMENT_WORKFLOW.md) の正規形式で GitHub Issue を 1 件作成してください。
 
 ## 作成前
 
 - タイトルが空なら作成せず、入力を求める。
-- `git remote -v`、`git status --short`、`docs/SPECIFICATION.md`、関連コード、ドキュメントを確認する。Issue 作成のためにファイルを変更しない。
+- `git remote -v`、`git status --short`、`spec/SPECIFICATION.md`、関連コード、ドキュメントを確認する。Issue 作成のためにファイルを変更しない。
 - `gh issue list --state all --search "$ARGUMENTS"` で重複候補を確認する。重複の可能性が高ければ作成せず候補を報告する。
 - 要求が曖昧、複数要求が矛盾、受入条件を検証可能にできない場合は作成せず確認を求める。
 - タイトルは必要な場合だけ `<type>: <具体的な変更または解決したい状態>` に正規化する。意味を変えない。

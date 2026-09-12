@@ -5,7 +5,7 @@ disable-model-invocation: true
 argument-hint: "Issue 番号。例: 12 または #12 #15"
 ---
 
-`$ARGUMENTS` から Issue 番号を抽出し、[docs/DEVELOPMENT_WORKFLOW.md](../../../docs/DEVELOPMENT_WORKFLOW.md) の `/11` 仕様に従って実装してください。空白、`,`、`、` 区切りを許可し、`#` は除去します。
+`$ARGUMENTS` から Issue 番号を抽出し、[spec/DEVELOPMENT_WORKFLOW.md](../../../spec/DEVELOPMENT_WORKFLOW.md) の `/11` 仕様に従って実装してください。空白、`,`、`、` 区切りを許可し、`#` は除去します。
 
 ## 開始前
 
@@ -22,7 +22,7 @@ argument-hint: "Issue 番号。例: 12 または #12 #15"
 
 ## 実装
 
-- `CLAUDE.md`、`docs/SPECIFICATION.md`、関連実装、テストを確認する。
+- `CLAUDE.md`、`spec/SPECIFICATION.md`、関連実装、テストを確認する。
 - 既存設計と WordPress 標準 API を優先し、Issue に必要な最小範囲だけを編集する。
 - 仕様変更が必要なら仕様書も更新する。
 - ユーザーの未コミット変更を破棄・上書きしない。

@@ -1,7 +1,8 @@
 # CLAUDE.md — ototsugu-connector
 
-機能仕様の正本は [docs/SPECIFICATION.md](./docs/SPECIFICATION.md) に置く。実装・テスト・ドキュメントを変更する際は、仕様との整合性を確認すること。
-Issue 起点の開発手順の正本は [docs/DEVELOPMENT_WORKFLOW.md](./docs/DEVELOPMENT_WORKFLOW.md) に置く。
+機能仕様の正本は [spec/SPECIFICATION.md](./spec/SPECIFICATION.md) に置く。実装・テスト・ドキュメントを変更する際は、仕様との整合性を確認すること。
+Issue 起点の開発手順の正本は [spec/DEVELOPMENT_WORKFLOW.md](./spec/DEVELOPMENT_WORKFLOW.md) に置く。
+ドキュメント運用方針の詳細は本ファイルの「ドキュメント運用方針」を参照。
 
 このリポジトリは、各団体(NPO法人本体、法人内の別事業、将来の他法人)のWordPressに導入する、
 相談会日程を管理・配信するためのプラグインです。命名は「各団体のWordPressを通知ネットワークに
@@ -13,6 +14,16 @@ Issue 起点の開発手順の正本は [docs/DEVELOPMENT_WORKFLOW.md](./docs/DE
   目的とした設計にする。団体固有のロジックを埋め込まない。
 - ototsugu-app(アプリ側)がこのプラグインのREST APIを叩いて日程を取得する。
 - 予約データはこのプラグインでは扱わない。日程には「外部予約システムへのURL」のみを持たせる。
+
+## ドキュメント運用方針(決定事項)
+
+シングルソースオブトゥルースを原則とする。
+
+- **正本(`spec/`)**: 決定済みの機能仕様([spec/SPECIFICATION.md](./spec/SPECIFICATION.md))と開発手順([spec/DEVELOPMENT_WORKFLOW.md](./spec/DEVELOPMENT_WORKFLOW.md))を置く。内容は決定事項のみとし、検討中・未決定の記述を残さない。
+- **検討中・調査中文書(`docs/`)**: まだ決定していない事項の検討メモ、調査記録を置く。決定した内容は `spec/` へ反映し、`docs/` 側の該当メモは整理する。
+- **ドキュメントの変更はIssueを作成して行う。** ソースコードの変更を伴う場合は、ドキュメントとコードをまとめて1つのIssueとする(仕様変更とその実装を別Issueに分けない)。
+- **変更プロセスの記録**: ドキュメントの変更作業は、後から経緯を振り返れるよう、対象Issueへのコメントで作業過程・判断内容を適宜記録する。
+- **spec の公開範囲**: `spec/SPECIFICATION.md` は、本プラグインが外部システム(ototsugu-app、他法人)からのREST API接続を前提とする性質上、GitHubでの公開に加え、適宜ブログでの公開も想定する。分割・抜粋は行わず、公開してよい内容(決定事項)のみを記載する前提を維持する。
 
 ## 主な機能
 

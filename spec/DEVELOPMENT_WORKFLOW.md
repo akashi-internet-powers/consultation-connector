@@ -103,7 +103,7 @@
 
 ## 参考
 
-- 仕様書: `docs/SPECIFICATION.md`
+- 仕様書: `spec/SPECIFICATION.md`
 - 関連ファイル、URL、スクリーンショットなど
 ```
 
@@ -190,10 +190,10 @@
 
 ### 8.3 実装ルール
 
-- `CLAUDE.md`、本仕様書、`docs/SPECIFICATION.md` の順序ではなく、内容の責務に応じてすべて確認する
+- `CLAUDE.md`、本仕様書、`spec/SPECIFICATION.md` の順序ではなく、内容の責務に応じてすべて確認する
 - 既存の抽象化、WordPress 標準 API、既存テストを優先する
 - Issue の対象外を変更しない
-- 仕様変更を伴う場合は `docs/SPECIFICATION.md` を更新する
+- 仕様変更を伴う場合は `spec/SPECIFICATION.md` を更新する
 - ユーザーの未コミット変更を破棄・上書きしない
 - コミット、PR 作成、Issue の自動クローズは行わない
 
