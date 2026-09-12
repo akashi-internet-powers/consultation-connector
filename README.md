@@ -1,9 +1,9 @@
-# consultation-connector
+# ototsugu-connector
 
 > このリポジトリは「相談会通知ネットワーク」を構成する3リポジトリの1つです。
 > 全体像は組織プロフィール(`.github`リポジトリのREADME)を参照してください。
 
-相談会日程を管理し、REST API経由で consultation-app へ配信するWordPressプラグイン。
+相談会日程を管理し、REST API経由で ototsugu-app へ配信するWordPressプラグイン。
 各団体のWordPressを通知ネットワークに「接続する」役割を持つことから、この名前にしています。
 各団体(法人内の別事業、将来の他法人)は、このプラグインを導入するだけで通知ネットワークに参加できることを目指しています。
 
@@ -56,11 +56,11 @@ Issue の実装は次の形式で開始します。
 ### インストール
 
 Local で作成したサイトの `app/public/wp-content/plugins/` に、このリポジトリのフォルダーを配置します。
-フォルダー名は `consultation-connector` としてください。
+フォルダー名は `ototsugu-connector` としてください。
 
 1. Local でサイトを起動する
 2. WordPress 管理画面の「プラグイン」を開く
-3. 「Consultation Connector」を有効化する
+3. 「Ototsugu Connector」を有効化する
 
 有効化すると、管理画面に「相談会日程」メニューが表示されます。ACF などの追加プラグインは必要ありません。
 
@@ -163,9 +163,9 @@ meta.reservation_url
 ## Local での開発メモ
 
 - Local のデータベースは MariaDB を使用します。
-- プラグインの変更は `wp-content/plugins/consultation-connector/` に配置したファイルへ反映されます。
+- プラグインの変更は `wp-content/plugins/ototsugu-connector/` に配置したファイルへ反映されます。
 - REST API の URL は Local のサイトドメインに合わせて読み替えてください。
-- 外部の consultation-app から Local の REST API を直接参照することはできません。外部連携を確認する場合は、公開可能な検証環境またはトンネルを用意してください。
+- 外部の ototsugu-app から Local の REST API を直接参照することはできません。外部連携を確認する場合は、公開可能な検証環境またはトンネルを用意してください。
 - 本番反映前に、本番と同じ PHP、WordPress、テーマ、パーマリンク設定で確認してください。
 
 ## ライセンス

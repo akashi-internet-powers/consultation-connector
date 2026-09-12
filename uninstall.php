@@ -4,4 +4,4 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
     exit;
 }
 
-delete_option('cc_detail_layout');
+delete_option('oc_detail_layout');

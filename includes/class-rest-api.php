@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class CC_Rest_Api
+class OC_Rest_Api
 {
     /**
      * register_post_meta の show_in_rest だけでも取得は可能だが、

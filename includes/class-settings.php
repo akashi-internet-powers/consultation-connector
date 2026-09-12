@@ -4,10 +4,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class CC_Settings
+class OC_Settings
 {
-    private const OPTION_NAME = 'cc_detail_layout';
-    private const PAGE_SLUG = 'cc-settings';
+    private const OPTION_NAME = 'oc_detail_layout';
+    private const PAGE_SLUG = 'oc-settings';
 
     public static function register(): void
     {
@@ -26,8 +26,8 @@ class CC_Settings
     {
         add_submenu_page(
             'edit.php?post_type=consultation_event',
-            __('相談会日程設定', 'consultation-connector'),
-            __('設定', 'consultation-connector'),
+            __('相談会日程設定', 'ototsugu-connector'),
+            __('設定', 'ototsugu-connector'),
             'manage_options',
             self::PAGE_SLUG,
             [self::class, 'render_page']
@@ -36,25 +36,25 @@ class CC_Settings
 
     public static function register_settings(): void
     {
-        register_setting('cc_settings', self::OPTION_NAME, [
+        register_setting('oc_settings', self::OPTION_NAME, [
             'type'              => 'string',
             'sanitize_callback' => [self::class, 'sanitize_layout'],
             'default'           => 'standard',
         ]);
 
         add_settings_section(
-            'cc_display_settings',
-            __('詳細画面の表示設定', 'consultation-connector'),
+            'oc_display_settings',
+            __('詳細画面の表示設定', 'ototsugu-connector'),
             '__return_false',
             self::PAGE_SLUG
         );
 
         add_settings_field(
             self::OPTION_NAME,
-            __('レイアウト', 'consultation-connector'),
+            __('レイアウト', 'ototsugu-connector'),
             [self::class, 'render_layout_field'],
             self::PAGE_SLUG,
-            'cc_display_settings'
+            'oc_display_settings'
         );
     }
 
@@ -68,10 +68,10 @@ class CC_Settings
         $layout = self::get_detail_layout();
         ?>
         <select name="<?php echo esc_attr(self::OPTION_NAME); ?>">
-            <option value="standard" <?php selected($layout, 'standard'); ?>><?php esc_html_e('標準表示', 'consultation-connector'); ?></option>
-            <option value="two-pane" <?php selected($layout, 'two-pane'); ?>><?php esc_html_e('2ペイン表示', 'consultation-connector'); ?></option>
+            <option value="standard" <?php selected($layout, 'standard'); ?>><?php esc_html_e('標準表示', 'ototsugu-connector'); ?></option>
+            <option value="two-pane" <?php selected($layout, 'two-pane'); ?>><?php esc_html_e('2ペイン表示', 'ototsugu-connector'); ?></option>
         </select>
-        <p class="description"><?php esc_html_e('2ペイン表示では、本文を左側、相談会の詳細情報を右側に表示します。モバイル幅では1カラムに切り替わります。', 'consultation-connector'); ?></p>
+        <p class="description"><?php esc_html_e('2ペイン表示では、本文を左側、相談会の詳細情報を右側に表示します。モバイル幅では1カラムに切り替わります。', 'ototsugu-connector'); ?></p>
         <?php
     }
 
@@ -79,10 +79,10 @@ class CC_Settings
     {
         ?>
         <div class="wrap">
-            <h1><?php esc_html_e('相談会日程設定', 'consultation-connector'); ?></h1>
+            <h1><?php esc_html_e('相談会日程設定', 'ototsugu-connector'); ?></h1>
             <form method="post" action="options.php">
                 <?php
-                settings_fields('cc_settings');
+                settings_fields('oc_settings');
                 do_settings_sections(self::PAGE_SLUG);
                 submit_button();
                 ?>

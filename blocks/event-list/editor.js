@@ -1,11 +1,11 @@
 (function (wp) {
     var __ = wp.i18n.__;
 
-    wp.blocks.registerBlockType('consultation-connector/event-list', {
-        title: __('相談会日程一覧', 'consultation-connector'),
+    wp.blocks.registerBlockType('ototsugu-connector/event-list', {
+        title: __('相談会日程一覧', 'ototsugu-connector'),
         category: 'widgets',
         icon: 'calendar-alt',
-        description: __('相談会の日程一覧をWeb表示する動的ブロック。', 'consultation-connector'),
+        description: __('相談会の日程一覧をWeb表示する動的ブロック。', 'ototsugu-connector'),
         attributes: {
             layout: {
                 type: 'string',
@@ -43,19 +43,19 @@
                     InspectorControls,
                     null,
                     wp.element.createElement(SelectControl, {
-                        label: __('表示形式', 'consultation-connector'),
+                        label: __('表示形式', 'ototsugu-connector'),
                         value: props.attributes.layout,
                         options: [
-                            { label: __('一行表示', 'consultation-connector'), value: 'list' },
-                            { label: __('表形式', 'consultation-connector'), value: 'table' },
-                            { label: __('カード形式', 'consultation-connector'), value: 'card' },
+                            { label: __('一行表示', 'ototsugu-connector'), value: 'list' },
+                            { label: __('表形式', 'ototsugu-connector'), value: 'table' },
+                            { label: __('カード形式', 'ototsugu-connector'), value: 'card' },
                         ],
                         onChange: function (layout) {
                             props.setAttributes({ layout: layout });
                         },
                     }),
                     wp.element.createElement(SelectControl, {
-                        label: __('日付表示', 'consultation-connector'),
+                        label: __('日付表示', 'ototsugu-connector'),
                         value: props.attributes.dateFormat,
                         options: [
                             { label: '2026年9月6日（日）', value: 'full' },
@@ -67,14 +67,14 @@
                         },
                     }),
                     wp.element.createElement(ToggleControl, {
-                        label: __('詳細リンクを表示', 'consultation-connector'),
+                        label: __('詳細リンクを表示', 'ototsugu-connector'),
                         checked: props.attributes.showDetailLink,
                         onChange: function (showDetailLink) {
                             props.setAttributes({ showDetailLink: showDetailLink });
                         },
                     }),
                     wp.element.createElement(ToggleControl, {
-                        label: __('予約URLリンクを表示', 'consultation-connector'),
+                        label: __('予約URLリンクを表示', 'ototsugu-connector'),
                         checked: props.attributes.showReservationLink,
                         onChange: function (showReservationLink) {
                             props.setAttributes({ showReservationLink: showReservationLink });
@@ -84,7 +84,7 @@
                 wp.element.createElement(
                     'p',
                     blockProps,
-                    __('相談会日程一覧（公開画面で表示されます）', 'consultation-connector')
+                    __('相談会日程一覧（公開画面で表示されます）', 'ototsugu-connector')
                 )
             );
         },
