@@ -4,10 +4,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class OC_Settings
+class OTSG_Settings
 {
-    private const OPTION_NAME = 'oc_detail_layout';
-    private const PAGE_SLUG = 'oc-settings';
+    private const OPTION_NAME = 'otsg_detail_layout';
+    private const PAGE_SLUG = 'otsg-settings';
 
     public static function register(): void
     {
@@ -36,14 +36,14 @@ class OC_Settings
 
     public static function register_settings(): void
     {
-        register_setting('oc_settings', self::OPTION_NAME, [
+        register_setting('otsg_settings', self::OPTION_NAME, [
             'type'              => 'string',
             'sanitize_callback' => [self::class, 'sanitize_layout'],
             'default'           => 'standard',
         ]);
 
         add_settings_section(
-            'oc_display_settings',
+            'otsg_display_settings',
             __('詳細画面の表示設定', 'ototsugu-connector'),
             '__return_false',
             self::PAGE_SLUG
@@ -54,7 +54,7 @@ class OC_Settings
             __('レイアウト', 'ototsugu-connector'),
             [self::class, 'render_layout_field'],
             self::PAGE_SLUG,
-            'oc_display_settings'
+            'otsg_display_settings'
         );
     }
 
@@ -82,7 +82,7 @@ class OC_Settings
             <h1><?php esc_html_e('相談会日程設定', 'ototsugu-connector'); ?></h1>
             <form method="post" action="options.php">
                 <?php
-                settings_fields('oc_settings');
+                settings_fields('otsg_settings');
                 do_settings_sections(self::PAGE_SLUG);
                 submit_button();
                 ?>

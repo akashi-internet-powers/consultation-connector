@@ -33,7 +33,7 @@
             var Fragment = wp.element.Fragment;
             var InspectorControls = wp.blockEditor.InspectorControls;
             var blockProps = wp.blockEditor.useBlockProps({
-                className: 'ce-event-list-editor-placeholder',
+                className: 'otsg-event-list-editor-placeholder',
             });
 
             return wp.element.createElement(
